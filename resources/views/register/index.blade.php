@@ -47,7 +47,7 @@
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
     </form>
-
+    @include('layout.error')
 </div> <!-- /container -->
 
 </body>

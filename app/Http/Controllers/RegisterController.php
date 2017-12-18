@@ -14,7 +14,7 @@ class RegisterController extends Controller
     {
         $this->vaildate(\request(),[
             'name'=>'required|min:3|unique:user,name',
-            'email'=>'required|'
+            'email'=>'required'
         ])
     }
 }

@@ -3,15 +3,19 @@
         <div class="blog-post">
             <div style="display:inline-flex">
                 <h2 class="blog-post-title"><?php echo e($post->title); ?></h2>
+                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('update',$post)): ?>
                 <a style="margin: auto"  href="/posts/<?php echo e($post->id); ?>/edit">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 </a>
+                <?php endif; ?>
+                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('delete',$post)): ?>
                 <a style="margin: auto"  href="/posts/<?php echo e($post->id); ?>/delete">
                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </a>
+                    <?php endif; ?>
             </div>
 
-            <p class="blog-post-meta"><?php echo e($post->created_at->toDayDateTimeString()); ?> by <a href="#">Kassandra Ankunding2</a></p>
+            <p class="blog-post-meta"><?php echo e($post->created_at->toDayDateTimeString()); ?> by <a href="#"><?php echo e($post->user->name); ?></a></p>
 
             <?php echo $post->content; ?>
 

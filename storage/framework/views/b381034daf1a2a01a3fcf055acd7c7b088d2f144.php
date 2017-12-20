@@ -35,7 +35,7 @@
 
                 <div class="blog-post">
                     <h2 class="blog-post-title"><a href="/posts/<?php echo e($post->id); ?>" ><?php echo e(str_limit($post->title,20,'...')); ?></a></h2>
-                    <p class="blog-post-meta"><?php echo e($post->created_at->toDayDateTimeString()); ?> by <a href="/user/273">1234567887</a></p>
+                    <p class="blog-post-meta"><?php echo e($post->created_at->toDayDateTimeString()); ?> by <a href="/user/273"><?php echo e($post->user->name); ?></a></p>
 
                     <?php echo str_limit($post->content,30,'...'); ?>
 

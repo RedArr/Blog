@@ -37,7 +37,7 @@
 
                 <div class="blog-post">
                     <h2 class="blog-post-title"><a href="/posts/{{$post->id}}" >{{str_limit($post->title,20,'...')}}</a></h2>
-                    <p class="blog-post-meta">{{$post->created_at->toDayDateTimeString()}} by <a href="/user/273">1234567887</a></p>
+                    <p class="blog-post-meta">{{$post->created_at->toDayDateTimeString()}} by <a href="/user/273">{{$post->user->name}}</a></p>
 
                     {!! str_limit($post->content,30,'...') !!}
                     <p class="blog-post-meta">赞 0  | 评论 0</p>

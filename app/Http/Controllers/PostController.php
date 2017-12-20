@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -28,9 +29,9 @@ class PostController extends Controller
             'title'=>'required|string|max:100|min:5',
             'content'=>'required|string|max:10000|min:10'
         ]);
-
-//        $post = Post::create(\request(['title','content']));
-        $post=Post::create(request(['title','content']));
+        $user_id = \Auth::id();
+        $params = array_merge(\request(['title','content']),compact('user_id'));
+        $post=Post::create($params);
         return redirect("/posts");
     }
 //    编辑文章
@@ -45,6 +46,8 @@ class PostController extends Controller
             'title'=>'required|string|max:100|min:5',
             'content'=>'required|string|max:10000|min:10'
         ]);
+        $this->authorize('update','$post');
+
 //    逻辑
         $post->title = request('title');
         $post->content = request('content');
@@ -56,6 +59,7 @@ class PostController extends Controller
 
 //    删除文章
     public function delete(Post $post){
+        $this ->authorize('detele','$post');
         $post->delete();
         return redirect("/posts");
     }

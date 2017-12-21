@@ -4,18 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Post;
+use \App\Comment;
 use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
     //列表
     public function index(){
-       $posts = Post::orderBy('created_at','desc')->paginate(6);
+       $posts = Post::orderBy('created_at','desc')->withCount("comments")->paginate(6);
+       $posts_count=Post::all()->count();
         return view("post/index",compact('posts'));
     }
 
 //    详情页
     public function show(Post $post){
+        $post->load('comments');
         return view("post/show",compact('post'));
     }
 //    创建页面
@@ -74,5 +78,16 @@ class PostController extends Controller
         return view('post/test');
     }
 
+    public function comment(Post $post){
+        $this->validate(\request(),[
+            'content'=>'required|min:3|max:200',
+        ]);
 
+        $comment = new Comment();
+        $comment->user_id = \Auth::id();
+        $comment->content= request('content');
+        $post->comments()->save($comment);
+
+        return back();
+    }
 }

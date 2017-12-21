@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/',function(){ return redirect('\login');});
+Route::get('/',function(){ return redirect('/login');});
 //用户模块
 //注册模块
 Route::get('/register','\App\Http\Controllers\RegisterController@index');
@@ -49,5 +49,7 @@ Route::group(['middleware'=>'auth:web'],function(){
     Route::post('/posts/image/upload','\App\Http\Controllers\PostController@upload');
 //测试
     Route::get('/test','\App\Http\Controllers\PostController@test');
+    //提交评论
+    Route::post('/posts/{post}/comment','\App\Http\Controllers\PostController@comment');
 
 });

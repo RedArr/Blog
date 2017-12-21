@@ -24,7 +24,7 @@
 
             </div>
         </div>
-
+<?php $__currentLoopData = $post->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="panel panel-default">
             <!-- Default panel contents -->
             <div class="panel-heading">评论</div>
@@ -32,24 +32,28 @@
             <!-- List group -->
             <ul class="list-group">
                 <li class="list-group-item">
-                    <h5>2017-05-28 10:15:08 by Kassandra Ankunding2</h5>
+                    <h5><?php echo e($comment->created_at); ?> by Kassandra <?php echo e($comment->user->name); ?></h5>
                     <div>
-                        这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论这是第一个评论
+                        <?php echo e($comment->content); ?>
+
                     </div>
                 </li>
             </ul>
         </div>
-
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <div class="panel panel-default">
             <!-- Default panel contents -->
             <div class="panel-heading">发表评论</div>
 
             <!-- List group -->
             <ul class="list-group">
-                <form action="/posts/comment" method="post">
-                    <input type="hidden" name="post_id" value="62"/>
+                <form action="/posts/<?php echo e($post->id); ?>/comment" method="post">
+                    <?php echo e(csrf_field()); ?>
+
+                    <input type="hidden" name="post_id" value="<?php echo e($post->id); ?>"/>
                     <li class="list-group-item">
                         <textarea name="content" class="form-control" rows="10"></textarea>
+                        <?php echo $__env->make('layout.error', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                         <button class="btn btn-default" type="submit">提交</button>
                     </li>
                 </form>

@@ -20,8 +20,11 @@
             <?php echo $post->content; ?>
 
             <div>
+                <?php if($post->zan(\Auth::id())->exists()): ?>
+                <a href="/posts/<?php echo e($post->id); ?>/unzan" type="button" class="btn btn-primary btn-lg">取消赞</a>
+                <?php else: ?>
                 <a href="/posts/<?php echo e($post->id); ?>/zan" type="button" class="btn btn-primary btn-lg">赞</a>
-
+                <?php endif; ?>
             </div>
         </div>
 <?php $__currentLoopData = $post->comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -32,7 +35,7 @@
             <!-- List group -->
             <ul class="list-group">
                 <li class="list-group-item">
-                    <h5><?php echo e($comment->created_at); ?> by Kassandra <?php echo e($comment->user->name); ?></h5>
+                    <h5><?php echo e($comment->created_at); ?> by <?php echo e($comment->user->name); ?></h5>
                     <div>
                         <?php echo e($comment->content); ?>
 

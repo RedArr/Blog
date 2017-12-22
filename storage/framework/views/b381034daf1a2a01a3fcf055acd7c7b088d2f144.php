@@ -39,7 +39,7 @@
 
                     <?php echo str_limit($post->content,30,'...'); ?>
 
-                    <p class="blog-post-meta">赞 0  | 评论 <?php echo e($post->comments_count); ?></p>
+                    <p class="blog-post-meta">赞 <?php echo e($post->zans_count); ?>  | 评论 <?php echo e($post->comments_count); ?></p>
                 </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                <?php echo e($posts->links()); ?>

@@ -30,7 +30,8 @@ Route::group(['middleware'=>'auth:web'],function(){
     Route::get('/user/me/setting','\App\Http\Controllers\UserController@setting');
 //个人设置操作
     Route::post('/user/me/setting','\App\Http\Controllers\UserController@settingStore');
-
+//搜索
+    Route::get('/posts/search','\App\Http\Controllers\PostController@search');
 //文章列表页
     Route::get('/posts','\App\Http\Controllers\PostController@index');
 //创建页面
@@ -49,11 +50,16 @@ Route::group(['middleware'=>'auth:web'],function(){
     Route::post('/posts/image/upload','\App\Http\Controllers\PostController@upload');
 //测试
     Route::get('/test','\App\Http\Controllers\PostController@test');
-    //提交评论
+//提交评论
     Route::post('/posts/{post}/comment','\App\Http\Controllers\PostController@comment');
-    //赞
+//赞
     Route::get('/posts/{post}/zan','\App\Http\Controllers\PostController@zan');
-    //取消赞
+//取消赞
     Route::get('/posts/{post}/unzan','\App\Http\Controllers\PostController@unzan');
-
+//个人中心
+    Route::get('/user/{user}','\App\Http\Controllers\UserController@show');
+//关注用户
+    Route::get('/user/{user}/fan','\App\Http\Controllers\UserController@fan');
+//取消关注用户
+    Route::get('/user/{user}/unfan','\App\Http\Controllers\UserController@unfan');
 });

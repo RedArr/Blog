@@ -22,20 +22,44 @@ class UserController extends Controller
         //业务逻辑
         $name= request('name');
         $user = \Auth::user();
-        if ($name != $user->name){
-            if (User::where('name',$name)->count()>0){
+        if ($name != $user->name)
+        {
+            if (User::where('name',$name)->count()>0)
+            {
                 return back()->withErrors('用户名已被占用');
             }
             $user->name = $name;
 
-    }
-    if (\request()->file('avatar')){
+        }
+        if (\request()->file('avatar'))
+        {
             $path = request()->file('avatar')->storePublicly($user->id);
             $user->avatar = "/storage/".$path;
-
-    }
-    $user->save();
+        }
+        $user->save();
         //渲染
         return back();
+    }
+    public function show(User $user)
+    {
+        //关注粉丝文章数
+        $user = User::withCount(['stars','fans','posts'])->find($user->id);
+        //文章前10条
+        $posts = $user->posts()->orderBy('created_at','desc')->take(10)->get();
+        //关注的用户 关注/粉丝/文章
+        $stars = $user->fans;
+        $susers = User::whereIn('id',$stars->pluck('star)id'))->withCount(['stars','fans','posts'])->get();
+        //粉丝用户 关注/粉丝/文章
+        $fans = $user->fans;
+        $fusers = User::whereIn('id',$fans->pluck('fan_id'))->withCount(['stars','fans','posts'])->get();
+        return view('user/show');
+    }
+    public function  fan()
+    {
+
+    }
+    public function unfan()
+    {
+
     }
 }

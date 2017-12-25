@@ -52,7 +52,8 @@ class UserController extends Controller
         //粉丝用户 关注/粉丝/文章
         $fans = $user->fans;
         $fusers = User::whereIn('id',$fans->pluck('fan_id'))->withCount(['stars','fans','posts'])->get();
-        return view('user/show');
+
+        return view('user/show',compact('user','susers','fusers','posts'));
     }
     public function  fan()
     {

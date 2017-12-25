@@ -1,1 +1,1 @@
-基于larravel的blog
+基于laravel的blog

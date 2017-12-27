@@ -59,7 +59,11 @@ Route::group(['middleware'=>'auth:web'],function(){
 //个人中心
     Route::get('/user/{user}','\App\Http\Controllers\UserController@show');
 //关注用户
-    Route::get('/user/{user}/fan','\App\Http\Controllers\UserController@fan');
+    Route::post('/user/{user}/fan','\App\Http\Controllers\UserController@fan');
 //取消关注用户
-    Route::get('/user/{user}/unfan','\App\Http\Controllers\UserController@unfan');
+    Route::post('/user/{user}/unfan','\App\Http\Controllers\UserController@unfan');
+//专题详情页
+    Route::get('/topic/{topic}','\App\Http\Controllers\TopicController@show');
+//投稿
+    Route::post('/topic/{topic}/submit','\App\Http\Controllers\TopicController@submit');
 });

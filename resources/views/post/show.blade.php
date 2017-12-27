@@ -16,7 +16,7 @@
                     @endcan
             </div>
 
-            <p class="blog-post-meta">{{$post->created_at->toDayDateTimeString()}} by <a href="#">{{$post->user->name}}</a></p>
+            <p class="blog-post-meta">{{$post->created_at->toDayDateTimeString()}} by <a href="/user/{{$post->user->id}}">{{$post->user->name}}</a></p>
 
             {!! $post->content !!}
             <div>

@@ -1,1 +1,1 @@
-基于laravel的blog
+基于laravel制作的类简书网站

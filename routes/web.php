@@ -67,3 +67,4 @@ Route::group(['middleware'=>'auth:web'],function(){
 //投稿
     Route::post('/topic/{topic}/submit','\App\Http\Controllers\TopicController@submit');
 });
+include_once ('admin.php');

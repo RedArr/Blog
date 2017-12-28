@@ -41,19 +41,17 @@ class Post extends Model
         return $this->hasMany(\App\Zan::class);
     }
     //属于某个作者的文章
-    public function scopeAuthorBy(Builder $query,$user_id)
-    {
-        return $query ->where('user_id',$user_id);
+    public function scopeAuthorBy(Builder $query,$user_id){
+        return $query->where('user_id','user_id');
     }
     public function postTopics()
     {
-        return $this->hasMang(\App\PostTopic::class,'post_id','id');
+        return $this->hasMany(\App\PostTopic::class,'post_id','id');
     }
     //不属于某个专题的文章
-    public function scopeTopicNotBy(Builder $query,$topic_id)
-    {
-        return $query->doesntHave('postTopics','and',function ($q) use ($topic_id){
-            $q->where('topic_id',$topic_id);
+    public function scopeTopicNotBy(Builder $query,$topic_id){
+        return $query->doesntHave('postTopic','and',function ($q) use ($query){
+            $q->where('topic_id','$topic_id');
         });
     }
 }

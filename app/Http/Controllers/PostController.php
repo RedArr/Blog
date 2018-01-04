@@ -7,6 +7,7 @@ use \App\Post;
 use \App\Comment;
 use \App\Zan;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Builder;
 
 
 class PostController extends Controller
@@ -64,19 +65,20 @@ class PostController extends Controller
 
 //    删除文章
     public function delete(Post $post){
+        //用户权限验证
         $this ->authorize('detele','$post');
         $post->delete();
         return redirect("/posts");
     }
 //    图片上传
-    public function upload(Request $request){
+
+    public function imageUpload(Request $request){
         $path = $request->file('wangEditorH5File')->storePublicly(md5(time()));
         return asset('storage/'.$path);
-        dd(request()->all());
     }
 //    测试
     public function  test(){
-        return view('post/test');
+        phpinfo();
     }
 
     public function comment(Post $post){
@@ -117,4 +119,6 @@ class PostController extends Controller
 
         return view('post/search',compact('posts','query'));
     }
+
+
 }

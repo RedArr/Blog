@@ -47,7 +47,7 @@ Route::group(['middleware'=>'auth:web'],function(){
 //删除逻辑
     Route::get('/posts/{post}/delete','\App\Http\Controllers\PostController@delete');
 //图片上传
-    Route::post('/posts/image/upload','\App\Http\Controllers\PostController@upload');
+    Route::post('/posts/image/upload','\App\Http\Controllers\PostController@imageUpload');
 //测试
     Route::get('/test','\App\Http\Controllers\PostController@test');
 //提交评论

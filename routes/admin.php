@@ -12,6 +12,8 @@ Route::group(['prefix'=>'admin'],function (){
         Route::get('/users','\App\Admin\Controllers\UserController@index');
         Route::get('/users/create','\App\Admin\Controllers\UserController@create');
         Route::post('/users/store','\App\Admin\Controllers\UserController@store');
+        Route::get('/users/{user}/delete','\App\Admin\Controllers\UserController@delete');
+        Route::get('/test','\App\Admin\Controllers\UserController@test');
     });
     //首页
 

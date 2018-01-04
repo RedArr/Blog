@@ -11,7 +11,7 @@ class Topic extends Model
     {
         $this->belongsToMany(\App\Post::class,'post_topics','topic_id','post_id');
     }
-    //专题的文章数,用于withcount
+    //专题的文章数,用于withCount
     public function postTopics()
     {
         $this->hasMany(\App\PostTopic::class,'topic_id','id');

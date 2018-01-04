@@ -42,7 +42,7 @@ class Post extends Model
     }
     //属于某个作者的文章
     public function scopeAuthorBy(Builder $query,$user_id){
-        return $query->where('user_id','user_id');
+        return $query->where('user_id',$user_id);
     }
     public function postTopics()
     {
@@ -50,8 +50,16 @@ class Post extends Model
     }
     //不属于某个专题的文章
     public function scopeTopicNotBy(Builder $query,$topic_id){
-        return $query->doesntHave('postTopic','and',function ($q) use ($query){
-            $q->where('topic_id','$topic_id');
+        return $query->doesntHave('postTopic','and',function ($q) use ($topic_id){
+            $q->where('topic_id',$topic_id);
         });
     }
+    //全局scope的方式
+//    protected static function boot()
+//    {
+//        parent::boot();
+//        static::addGlobalScope("avaiable",function (Builder $builder){
+//            $builder->where('status',[0,1]);
+//        });
+//    }
 }

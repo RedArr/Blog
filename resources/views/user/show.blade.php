@@ -32,12 +32,12 @@
                         @endforeach
                     </div>
                     <div class="tab-pane" id="tab_2">
-                        @foreach($susers as $user)
+                        @foreach($susers as $suser)
                         <div class="blog-post" style="margin-top: 30px">
-                            <p class="">{{$user->name}}</p>
-                            <p class="">关注：{{$user->stars_count}} | 粉丝：{{$user->fans_count}}｜ 文章：{{$user->posts_count}}</p>
+                            <p class="">{{$suser->name}}</p>
+                            <p class="">关注：{{$suser->stars_count}} | 粉丝：{{$suser->fans_count}}｜ 文章：{{$suser->posts_count}}</p>
 
-                            @include('user.badges.like',['target_user'=>$user])
+                            @include('user.badges.like',['target_user'=>$suser])
 
                         </div>
                         @endforeach
@@ -49,7 +49,7 @@
                                 <p class="">{{$fan->name}}</p>
                                 <p class="">关注：{{$fan->stars_count}} | 粉丝：{{$fan->fans_count}}｜ 文章：{{$fan->posts_count}}</p>
 
-                                @include('user.badges.like',['target_user'=>$user])
+                                @include('user.badges.like',['target_user'=>$fan])
 
                             </div>
                         @endforeach

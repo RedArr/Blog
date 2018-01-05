@@ -43,6 +43,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         //关注粉丝文章数
+
         $user = User::withCount(['stars','fans','posts'])->find($user->id);
         //文章前10条
         $posts = $user->posts()->orderBy('created_at','desc')->take(10)->get();
@@ -55,6 +56,7 @@ class UserController extends Controller
         $fusers = User::whereIn('id',$fans->pluck('fan_id'))->withCount(['stars','fans','posts'])->get();
         return view('user/show',compact('user','susers','fusers','posts'));
     }
+    //关注
     public function  fan(User $user)
     {
         $me = \Auth::user();
@@ -65,6 +67,7 @@ class UserController extends Controller
             'msg'=>''
         ];
     }
+    //取消关注
     public function unfan(User $user)
     {
         $me = \Auth::user();

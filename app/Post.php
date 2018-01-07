@@ -4,7 +4,8 @@ namespace App;
 
 use App\Model;
 use Laravel\Scout\Searchable;
-use PhpParser\Builder;
+//use PhpParser\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Model
 {
@@ -55,11 +56,11 @@ class Post extends Model
         });
     }
     //全局scope的方式
-//    protected static function boot()
-//    {
-//        parent::boot();
-//        static::addGlobalScope("avaiable",function (Builder $builder){
-//            $builder->where('status',[0,1]);
-//        });
-//    }
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope("avaiable",function (Builder $builder){
+            $builder->whereIn('status',[0,1]);
+        });
+    }
 }

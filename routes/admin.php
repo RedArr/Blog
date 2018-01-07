@@ -14,6 +14,10 @@ Route::group(['prefix'=>'admin'],function (){
         Route::post('/users/store','\App\Admin\Controllers\UserController@store');
         Route::get('/users/{user}/delete','\App\Admin\Controllers\UserController@delete');
         Route::get('/test','\App\Admin\Controllers\UserController@test');
+
+        //审核
+        Route::get('/posts','\App\Admin\Controllers\PostController@index');
+        Route::post('/posts/{post}/status','\App\Admin\Controllers\PostController@status');
     });
     //首页
 
